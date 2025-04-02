@@ -18,7 +18,7 @@ class FirestoreRestaurantRepo implements RestuarantRepo {
   }
 
   @override
-  Stream<List<Restaurant>> getRestaurants() =>
+  Stream<List<Restaurant>> getRestaurantsStream() =>
       _db.collection("restaurants").snapshots().map((snapshot) => snapshot.docs
           .map((doc) => Restaurant.fromMap(doc.data(), doc.id))
           .toList());
@@ -70,5 +70,13 @@ class FirestoreRestaurantRepo implements RestuarantRepo {
               .map((doc) => Restaurant.fromMap(doc.data(), doc.id))
               .toList(),
         );
+  }
+
+  @override
+  Future<List<Restaurant>> getRestaurants() async {
+    return await _db.collection("restaurants").get().then((snapshot) => snapshot
+        .docs
+        .map((doc) => Restaurant.fromMap(doc.data(), doc.id))
+        .toList());
   }
 }

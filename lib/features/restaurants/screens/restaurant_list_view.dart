@@ -63,7 +63,7 @@ class _RestaurantListViewState extends State<RestaurantListView> {
                 ),
                 Divider(),
                 StreamBuilder(
-                    stream: widget.repo.getRestaurants(),
+                    stream: widget.repo.getRestaurantsStream(),
                     builder: (constext, snapshot) {
                       if (snapshot.hasError) {
                         return Text("Fehler: ${snapshot.error}");

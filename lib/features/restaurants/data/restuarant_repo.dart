@@ -4,7 +4,8 @@ abstract class RestuarantRepo {
   Future<void> addRestaurant(Restaurant restaurant);
   Future<void> deleteRestaurant(String docID);
   Future<void> updateRestaurant(Restaurant restaurant);
-  Stream<List<Restaurant>> getRestaurants();
+  Future<List<Restaurant>> getRestaurants();
+  Stream<List<Restaurant>> getRestaurantsStream();
   Future<List<Restaurant>> filterByRating(int rating);
   Future<List<Restaurant>> filterByPostalcode(String postalcode);
   Future<List<Restaurant>> filterByPostalcodeAndRating(

@@ -23,11 +23,22 @@ class _FilterRestaurantScreenState extends State<FilterRestaurantScreen> {
   final _formKey = GlobalKey<FormState>();
   TextEditingController plzController = TextEditingController();
 
+  @override
+  void initState() {
+    _load();
+    super.initState();
+  }
+
+  _load() async {
+    restaurants = await widget.repo.getRestaurants();
+    setState(() {});
+  }
+
   void filter() async {
     if (!_formKey.currentState!.validate()) return;
 
     String postalCode = plzController.text;
-    errorText = "Füge Filter ein"; // Default error message
+    errorText = '';
 
     if (rating != null && postalCode.isNotEmpty) {
       restaurants =
@@ -37,10 +48,10 @@ class _FilterRestaurantScreenState extends State<FilterRestaurantScreen> {
     } else if (postalCode.isNotEmpty) {
       restaurants = await widget.repo.filterByPostalcode(postalCode);
     } else {
-      return;
+      // show all
+      restaurants = await widget.repo.getRestaurants();
     }
 
-    errorText = '';
     setState(() {});
   }
 

@@ -18,17 +18,16 @@ class NewRestaurantScreen extends StatefulWidget {
 
 class _NewRestaurantScreenState extends State<NewRestaurantScreen> {
   final _formKey = GlobalKey<FormState>();
-  late final TextEditingController titleController;
-  late final TextEditingController ratingController;
-  late final TextEditingController plzController;
+  final TextEditingController titleController = TextEditingController();
+  final TextEditingController ratingController = TextEditingController();
+  final TextEditingController plzController = TextEditingController();
 
   @override
   void initState() {
     if (widget.restaurant != null) {
-      titleController = TextEditingController(text: widget.restaurant!.title);
-      plzController = TextEditingController(text: widget.restaurant!.plz);
-      ratingController =
-          TextEditingController(text: widget.restaurant!.rating.toString());
+      titleController.text = widget.restaurant!.title;
+      plzController.text = widget.restaurant!.plz;
+      ratingController.text = widget.restaurant!.rating.toString();
     }
 
     super.initState();
